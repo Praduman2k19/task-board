@@ -16,222 +16,104 @@ The focus of this project is clean backend logic, authentication, database relat
 
 ---
 
-## Tech Stack
+# Task Board – Full Stack Assignment
 
-- Next.js (App Router)
-- TypeScript
-- Prisma ORM
-- SQLite (Relational Database)
-- Tailwind CSS
-- bcryptjs (for password hashing)
+## Live Demo
 
----
+- https://task-board-nu-eight.vercel.app
 
-## Authentication Flow
+## for HR
 
-1. User signs up using email and password.
-2. Password is hashed using bcrypt before storing in the database.
-3. During login:
-   - Email is verified.
-   - Password is compared with the hashed password.
-4. After successful login, a `userId` cookie is stored.
-5. All task APIs check this cookie to ensure only authenticated users can access their own tasks.
+Simple Task Board is a minimal full-stack app where users sign up, log in, and manage personal tasks (create, view, update status). Built as an assignment to demonstrate backend correctness, authentication, and a small Next.js App Router frontend.
 
-Each user can only create, view, and update their own tasks.
+## Short Technical Summary (for tech reviewers)
 
----
+- Framework: Next.js (App Router)
+- Language: TypeScript
+- DB: Prisma ORM + SQLite (local)
+- Auth: Email/password (hashed with bcryptjs) and a simple `userId` cookie for session wiring
+- Features: Signup, Login, Create Task, List Tasks, Update Task Status
 
-## Database Schema
+The code focuses on correct API behavior, access control (each user can only access their tasks), and a simple, testable backend.
 
-### User
-
-- id (UUID)
-- email (unique)
-- password (hashed)
-- createdAt
-
-### Task
-
-- id (UUID)
-- title
-- status (Enum: TODO, IN_PROGRESS, DONE)
-- userId (Foreign Key → User.id)
-- createdAt
-
-Relationship:
-
-- One User → Many Tasks
-- Each Task belongs to one User
-
----
-
-## How to Run Locally
+## for developer
 
 1. Install dependencies
 
-```bash
+```
 npm install
 ```
 
-2. Run Prisma migration
+2. Generate Prisma client (required)
 
-```bash
+```
+npx prisma generate
+```
+
+3. Run migrations and create local DB (first run)
+
+```
 npx prisma migrate dev --name init
 ```
 
-3. Start development server
+4. Start development server
 
-```bash
+```
 npm run dev
 ```
 
-4. Open in browser:
+5. Open the app:
 
 ```
 http://localhost:3000
 ```
 
----
+Notes:
+- If you prefer not to run Prisma locally, the app contains a lightweight JSON fallback used during development when the generated Prisma client is unavailable. For production-like behavior, run `prisma generate` and migrations as above.
 
-## API Testing Guide
+## Environment
 
-Base URL:
+- No special environment variables are required for the default local SQLite setup. If you change the datasource (e.g., Postgres), set `DATABASE_URL` in a `.env` file.
 
-```
-http://localhost:3000
-```
+## API Reference (quick)
 
-Make sure the server is running before testing.
+Base URL (local): `http://localhost:3000`
 
----
+1) Signup — POST `/api/auth/signup`
+  - Body: `{ "email": "you@example.com", "password": "yourpass" }`
 
-### 1. Signup
+2) Login — POST `/api/auth/login`
+  - Body: `{ "email": "you@example.com", "password": "yourpass" }`
+  - On success: a `userId` cookie is set.
 
-**POST**
+3) Create Task — POST `/api/tasks`
+  - Body: `{ "title": "Task title" }`
 
-```
-http://localhost:3000/api/auth/signup
-```
+4) List Tasks — GET `/api/tasks`
 
-Body:
-
-```json
-{
-  "email": "test@example.com",
-  "password": "123456"
-}
-```
-
----
-
-### 2. Login
-
-**POST**
-
-```
-http://localhost:3000/api/auth/login
-```
-
-Body:
-
-```json
-{
-  "email": "test@example.com",
-  "password": "123456"
-}
-```
-
-After successful login, a `userId` cookie is set automatically.
-
----
-
-### 3. Create Task
-
-**POST**
-
-```
-http://localhost:3000/api/tasks
-```
-
-Body:
-
-```json
-{
-  "title": "Complete assignment"
-}
-```
-
----
-
-### 4. Get All Tasks
-
-**GET**
-
-```
-http://localhost:3000/api/tasks
-```
-
-Returns all tasks created by the logged-in user.
-
----
-
-### 5. Update Task Status
-
-**PATCH**
-
-```
-http://localhost:3000/api/tasks/{taskId}
-```
-
-Body:
-
-```json
-{
-  "status": "DONE"
-}
-```
-
-Allowed values:
-
-- TODO
-- IN_PROGRESS
-- DONE
-
----
-
-## Recommended Testing Order
-
-1. Signup  
-2. Login  
-3. Create Task  
-4. Get Tasks  
-5. Update Task Status  
-6. Get Tasks again to verify changes  
-
----
+5) Update Task — PATCH `/api/tasks/{taskId}`
+  - Body: `{ "status": "DONE" }` (allowed: TODO, IN_PROGRESS, DONE)
 
 ## Project Structure
 
 ```
 src/
- ├── app/
- │    ├── api/
- │    │    ├── auth/
- │    │    └── tasks/
+ ├── app/           # Next.js App Router pages + api
+ │    ├── api/      # API routes (auth, tasks)
+ │    ├── dashboard/
  │    ├── login/
- │    ├── signup/
- │    └── dashboard/
- ├── lib/
- │    └── prisma.ts
- prisma/
-   └── schema.prisma
+ │    └── signup/
+ ├── lib/           # helper code (prisma client wrapper)
+ prisma/             # schema and migrations
 ```
 
----
+## Notes for reviewers
 
-## Notes
+- Authentication is cookie-based (simple `userId` cookie). For a more robust system use signed HTTP-only cookies or JWT/session store.
+- The Prisma client must be generated (`npx prisma generate`) before first run to use the RDBMS-backed flows; otherwise the code falls back to a minimal JSON store for quick local testing.
 
-- SQLite is used for simple local setup.
-- Passwords are securely hashed.
-- Task-user isolation is enforced at the database level.
-- The focus is correctness, clarity, and backend understanding.
+## Deployment
+
+Live demo (deployed to Vercel): https://task-board-nu-eight.vercel.app
+
+
