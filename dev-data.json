@@ -1,51 +1,19 @@
 {
-  "users": [
-    {
-      "id": "d672f519-fe51-4df5-8354-1a8fc27ed591",
-      "email": "test@example.com",
-      "password": "$2b$10$zlFI6wSjHc9uxWoKbyDRNO8luvX/ydbO.eT.XX82ezplu1HyZUDvC",
-      "createdAt": "2026-02-12T19:30:46.110Z"
-    },
-    {
-      "id": "2b8c1e87-d111-4bb6-b43a-8b770eb5c2ad",
-      "email": "praduman2k19@gmail.com",
-      "password": "$2b$10$2q.jgqW4iZpwaW6uPcPY3u5PQ10L24Nv9uGRBTeKzQjs497wM3aCK",
-      "createdAt": "2026-02-12T19:34:31.212Z"
-    },
-    {
-      "id": "e1b5d40c-3219-4baa-9174-15837b84e33d",
-      "email": "praduman2k23@gmail.com",
-      "password": "$2b$10$NPGG4OFeKig8qeNhyyNyTuhHTGSxloPZppNoKiSdbB0EssEst8Cue",
-      "createdAt": "2026-02-12T19:42:14.192Z"
-    },
-    {
-      "id": "4fbbb97e-fe00-44ce-9eea-c9535b1fb798",
-      "email": "praduman2k191@gmail.com",
-      "password": "$2b$10$zJWj7RLuT8eNONaV1WB3y.POcGR9diNWyrZFKkI293uQ0WQTsxoMy",
-      "createdAt": "2026-02-12T21:51:46.414Z"
-    }
-  ],
+  "users": [],
   "tasks": [
     {
-      "id": "f7f7d044-8fe7-4d24-bdfc-d0d8400aa6ba",
-      "title": "fghj",
-      "status": "TODO",
-      "userId": "2b8c1e87-d111-4bb6-b43a-8b770eb5c2ad",
-      "createdAt": "2026-02-12T19:36:07.653Z"
-    },
-    {
-      "id": "f97733da-b315-48b1-bac8-2faa67a81720",
-      "title": "yutretsdfgh",
+      "id": "21d429ef-7595-4f28-8698-99a26a071320",
+      "title": "jhgfhj",
       "status": "DONE",
       "userId": "2b8c1e87-d111-4bb6-b43a-8b770eb5c2ad",
-      "createdAt": "2026-02-12T19:36:12.071Z"
+      "createdAt": "2026-02-12T22:50:28.032Z"
     },
     {
-      "id": "7eea8812-cff4-4c9d-bb48-25622084dc74",
-      "title": "jhgfxchvb",
-      "status": "TODO",
-      "userId": "2b8c1e87-d111-4bb6-b43a-8b770eb5c2ad",
-      "createdAt": "2026-02-12T19:49:59.650Z"
+      "id": "be96b064-58b3-4f6a-b9ba-f526aff56c99",
+      "title": "kjhg",
+      "status": "IN_PROGRESS",
+      "userId": "e1b5d40c-3219-4baa-9174-15837b84e33d",
+      "createdAt": "2026-02-12T22:54:27.371Z"
     }
   ]
 }

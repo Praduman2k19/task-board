@@ -11,6 +11,16 @@ html, body {
 	color: #111827;
 }
 
+
+	:root {
+	  --bg: #f7fafc;
+	  --card: #ffffff;
+	  --muted: #6b7280;
+	  --primary: #2563eb;
+	  --primary-700: #1d4ed8;
+	  --accent: #10b981;
+	  --glass: rgba(15,23,42,0.06);
+	}
 .min-h-screen { min-height: 100vh; }
 .max-w-xl { max-width: 720px; }
 .mx-auto { margin-left: auto; margin-right: auto; }
@@ -34,10 +44,61 @@ html, body {
 .transition { transition: background-color 150ms ease; }
 .space-y-3 > * + * { margin-top: 0.75rem; }
 
+	/* Layout container */
+	.container { max-width: 1100px; margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem; }
+
+	/* Header */
+	.site-header { background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.4)); backdrop-filter: blur(6px); box-shadow: 0 1px 0 rgba(0,0,0,0.04); position: sticky; top: 0; z-index: 40; }
+	.header-inner { display:flex; align-items:center; justify-content:space-between; padding:0.75rem 0; }
+	.brand { font-weight:700; color:var(--primary); text-decoration:none; font-size:1.05rem; }
+	.nav { display:flex; gap:0.75rem; }
+	.nav-link { color: #334155; text-decoration:none; padding:0.4rem 0.6rem; border-radius:8px; font-size:0.95rem; }
+	.nav-link:hover { background: var(--glass); }
+
+	/* Main content spacing */
+	.main-content { padding-top: 1.25rem; padding-bottom: 2.5rem; }
+
+	/* Card and form improvements */
+	.card { background: var(--card); box-shadow: 0 8px 30px rgba(2,6,23,0.06); border-radius: 12px; padding: 1.5rem; }
+	.form-title { font-size: 1.125rem; font-weight: 600; margin-bottom: 0.75rem; }
+	input[type="text"], input[type="email"], input[type="password"], select, textarea {
+	  width: 100%; padding: 0.6rem 0.75rem; border-radius: 8px; border: 1px solid #e6e9ef; font-size: 0.95rem; outline: none; background: #fff;
+	}
+	input:focus, select:focus, textarea:focus { box-shadow: 0 0 0 4px rgba(37,99,235,0.08); border-color: var(--primary); }
+
+	.btn { display:inline-flex; align-items:center; justify-content:center; padding:0.55rem 1rem; border-radius:8px; font-weight:600; text-decoration:none; cursor:pointer; }
+	.btn-primary { background:var(--primary); color:#fff; border:0; }
+	.btn-primary:hover { background:var(--primary-700); }
+	.btn-ghost { background:transparent; color:#0f172a; border:1px solid #e6eef8; }
+
+	/* Task list */
+	.task-row { display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:0.75rem; border-radius:10px; background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.4)); border:1px solid rgba(15,23,42,0.04); }
+	.task-title { font-size:0.98rem; color:#0f172a; }
+	.task-meta { display:flex; gap:0.5rem; align-items:center; }
+	.badge { padding:0.25rem 0.5rem; border-radius:999px; font-size:0.75rem; font-weight:600; color:#fff; }
+	.badge.todo { background:#64748b; }
+	.badge.inprogress { background:#f59e0b; }
+	.badge.done { background:#10b981; }
+
+	/* Compact status select used in task rows */
+	.status-select {
+		width: auto;
+		min-width: 120px;
+		max-width: 220px;
+		padding: 0.35rem 0.6rem;
+		font-size: 0.9rem;
+		border-radius: 8px;
+		border: 1px solid #e6e9ef;
+		background: #fff;
+	}
+
+	/* Responsive tweaks */
+
 /* Responsive tweaks */
 @media (max-width: 640px) {
 	.max-w-xl { max-width: 100%; }
 	.px-6 { padding-left: 1rem; padding-right: 1rem; }
+	  .nav { display:none; }
 	.py-10 { padding-top: 1.25rem; padding-bottom: 1.25rem; }
 	.text-xl { font-size: 1rem; }
 }

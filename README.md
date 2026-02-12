@@ -73,7 +73,18 @@ Notes:
 
 ## Environment
 
-- No special environment variables are required for the default local SQLite setup. If you change the datasource (e.g., Postgres), set `DATABASE_URL` in a `.env` file.
+- By default the project can run with SQLite for quick local testing. For production you should use PostgreSQL (recommended).
+
+- To use PostgreSQL, create a `.env` file at the project root and set `DATABASE_URL`. Example (see `.env.example`):
+
+```
+DATABASE_URL="postgresql://postgres:[FyUw!3jq%ie9tG2]@db.wxgzkubelbqllqcvmjaf.supabase.co:5432/postgres"
+```
+
+- After setting `DATABASE_URL`, run the Prisma commands below to generate the client and apply migrations.
+
+Notes:
+- For a quick local demo without Postgres the app contains a lightweight JSON fallback used when the generated Prisma client is unavailable. For production-like behavior always run `prisma generate` and migrations against your Postgres database.
 
 ## API Reference (quick)
 

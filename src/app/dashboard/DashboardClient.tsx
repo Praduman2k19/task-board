@@ -89,7 +89,7 @@ export default function DashboardClient() {
             <select
               value={task.status}
               onChange={(e) => updateStatus(task.id, e.target.value)}
-              className="border border-gray-300 p-1 rounded-md text-sm"
+              className="status-select"
             >
               <option value="TODO">Todo</option>
               <option value="IN_PROGRESS">In Progress</option>
