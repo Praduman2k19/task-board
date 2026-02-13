@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is a simple Task Board application built using Next.js (App Router), TypeScript, Prisma, and SQLite.
+This is a simple Task Board application built using Next.js (App Router), TypeScript, Prisma, and PostgreSQL.
 
 The application allows users to:
 
@@ -30,7 +30,7 @@ Simple Task Board is a minimal full-stack app where users sign up, log in, and m
 
 - Framework: Next.js (App Router)
 - Language: TypeScript
-- DB: Prisma ORM + SQLite (local)
+- DB: Prisma ORM + PostgreSQL (recommended)
 - Auth: Email/password (hashed with bcryptjs) and a simple `userId` cookie for session wiring
 - Features: Signup, Login, Create Task, List Tasks, Update Task Status
 
@@ -69,22 +69,17 @@ http://localhost:3000
 ```
 
 Notes:
-- If you prefer not to run Prisma locally, the app contains a lightweight JSON fallback used during development when the generated Prisma client is unavailable. For production-like behavior, run `prisma generate` and migrations as above.
+- The app expects a generated Prisma client and a running PostgreSQL database for persistent data. Run `npx prisma generate` and `npx prisma migrate dev --name init` before starting the app.
 
 ## Environment
 
-- By default the project can run with SQLite for quick local testing. For production you should use PostgreSQL (recommended).
-
-- To use PostgreSQL, create a `.env` file at the project root and set `DATABASE_URL`. Example (see `.env.example`):
+- The project is configured to use PostgreSQL. Create a `.env` file at the project root and set `DATABASE_URL` (see `.env.example`).
 
 ```
-DATABASE_URL="postgresql://postgres:[FyUw!3jq%ie9tG2]@db.wxgzkubelbqllqcvmjaf.supabase.co:5432/postgres"
+DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DATABASE?schema=public"
 ```
 
-- After setting `DATABASE_URL`, run the Prisma commands below to generate the client and apply migrations.
-
-Notes:
-- For a quick local demo without Postgres the app contains a lightweight JSON fallback used when the generated Prisma client is unavailable. For production-like behavior always run `prisma generate` and migrations against your Postgres database.
+- After setting `DATABASE_URL`, generate the Prisma client and apply migrations as shown in the Quick Start section.
 
 ## API Reference (quick)
 
@@ -121,7 +116,7 @@ src/
 ## Notes for reviewers
 
 - Authentication is cookie-based (simple `userId` cookie). For a more robust system use signed HTTP-only cookies or JWT/session store.
-- The Prisma client must be generated (`npx prisma generate`) before first run to use the RDBMS-backed flows; otherwise the code falls back to a minimal JSON store for quick local testing.
+ - The Prisma client must be generated (`npx prisma generate`) before first run to use the database-backed flows.
 
 ## Deployment
 
